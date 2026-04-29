@@ -1,0 +1,377 @@
+точка доступа - access point
+время доступа - access time
+сложение - addition
+рекламное ПО - adware
+искусственный интеллект - AI (artificial intelligence)
+аналоговый, цифровой сигналы - analog and digital signals
+код приложения - application code
+приложение - application/ app
+дополненная реальность - AR (augmented reality)
+арифметико-логическое устройство - ALU (Arithmetic Logic Unit)
+искусственная нейронная сеть, ИНС - artificial neural network
+ассемблер - assembler
+языки ассемблера, низкоуровневые языки, близкие к ассемблеру - assembly languages
+асинхронная передача данных - asynchronous transmission
+затухание (ослабление) сигнала - attenuation of a signal
+магистраль - backbone
+лазейка в системе безопасности - backdoor
+разработка серверных компонентов приложения - backend development
+фоновые шаблоны - background templates
+алгоритм обратного распространения ошибки - backpropagation
+резервное копирование - backup
+пропускная способность (ширина полосы пропускания) - bandwidth
+базовая система ввода/вывода - BIOS (Basic Input/Output System)
+аккумуляторная батарея - battery pack
+двоичный код - binary code
+биометрические средства защиты - biometric security devices
+мост - bridge
+широкополосный интернет - broadband connection
+встроенная камера - built-in webcam
+шина - bus
+разрядность шины - bus width
+топология общая шина - bus topology
+когерентность кэша - cache coherency
+попадание в кэш - cache hit
+промах кэша - cache miss
+размер кэш-строки - cache line size
+вычисления - calculations
+конденсатор - capacitor
+сотовая связь - cellular connection
+центральный процессор - CPU (Central Processing Unit)
+печатная плата - circuit board
+архитектура клиент-сервер - client-server architecture
+такстовая частота - clock speed
+облачные вычисления - cloud computing
+коаксиальный кабель - coaxial cable
+совместимый - compatible
+компилятор - compiler
+согласованные данные - consistent data
+блок управления - control unit
+кооперативная многозадачность; совместная многозадачность, невытесняющая многозадачность - cooperative multitasking
+медный провод - copper cable
+автоматизированная поисковая система - crawler-based search engine
+поиск (сканирование информации) - crawling
+каскадные таблицы стилей - CSS (Cascading Style Sheets)
+канальный уровень - data link layer
+передача данных - data transmission
+коммутация дейтаграммных пакетов - datagram packet switching
+распределённая атака на отказ в обслуживании - DDoS attack (Distributed Denial of Service)
+отладка - debugging
+выделенная линия - dedicated line
+настройки по умолчанию (стандартные) - default settings
+задержка (передачи сигнала) - delay/ latency
+стационарный компьютер - desktop PC
+съемная клавиатура - detachable keyboard
+коммутируемое соединение - dial-up connection
+частичное копирование, разностное резервное копирование - differential backup
+цифровой сигнал - digital signal
+цифровая абонентская линия - DSL (Digital Subscriber Line)
+каталог, папка - directory
+искажение сигнала (расхождение) - distortion of a signal
+деление - division
+скорость скачивания (загрузки) - download speed
+инкапсуляция - encapsulation (for OOP)
+шифрование - encryption
+энергопотребление - energy consumption
+перезаписываемый, допускающий возможность стирания - erasable
+исполняемый файл - executable file
+карта расширения - expansion card
+слоты расширения - expansion slots
+внешний жёсткий диск - external hard disk drive (HDD)
+характеристика, особенность - feature
+оптоволоконный кабель - fiber-optic cables
+брэндмауэр, межсетевой экран - firewall
+прошивка - firmware
+флэшка - flash drive
+транзистор с плавающим затвором - floating gate transistor
+дискета - floppy disk
+шрифт - font
+нижний колонтитул - footer
+форматирование - formatting
+бесплатное ПО - freeware
+системная (фронтальная) шина - front side bus
+протокол передачи данных - FTP (File Transfer Protocol)
+полносвязные нейросети - fully connected neural networks
+шлюз, межсетевой шлюз - gateway
+геостационарный спутник - geostationary satellite
+графический интерфейс пользователя - GUI (Graphical User Interface)
+портативные устройства - handheld, palmtop, portable devices
+аппаратное техническое обеспечение - hardware
+верхний колонтитул - header
+авария головки (поломка магнитной головки у HDD) - head crash
+наушники - headphones
+сотрудник службы технической поддержки - help-desk troubleshooter (technician)
+эвристическое сканирование - heuristic scanning
+скрытые элементы - hidden units
+высокоуровневый язык - high level language
+высокоскоростное интернет-соединение - high-speed Internet connection
+межсетевой экран узлов (software) - host-based firewall
+общая точка доступа - hot spot
+язык разметки гипертекста - HTML (Hypertext Markup Language)
+протокол гипертекстовой передачи - HTTP (Hyper Text Transfer Protocol)
+концентратор или повторитель - hub
+веб-каталог - human-powered directory
+гиперссылки - hyperlinks
+выборочное копирование - incremental backup
+индексирование - indexing
+отступ - indent
+устройство ввода/вывода информации - input/ output device
+регистр инструкций - IR (Instruction Register)
+микросхема, интегральная схема - integrated circuits
+взаимосвязанные узлы - interconnected nodes
+внутреннее/внешнее устройство хранения - internal/external storage device
+доступ к интернету - Internet access
+интерпретатор - interpreter
+наследование - inheritance
+интернет вещей - IoT (the Internet of Things)
+команда перехода - jump command
+ядро - kernel
+основные характеристики, отличительные признаки - key features
+клавиатурный шпион - keylogger
+ноутбук - laptop
+лазерный луч - laser beam
+расположение, макет (сайта) - layout
+межстрочный интервал - line spacing
+локальная сеть - LAN (Local Area Network)
+жидкокристаллический дисплей - LCD (liquid crystal display)
+нижний регистр - lowercase
+низкоуровневый язык - low-level language
+машинное обучение - machine learning
+магнитная лента - magnetic tape
+мейнфрейм, мощный сервер - mainframe
+сделать резервную копию - make a backup
+вредоносное ПО - malware
+городская сеть - MAN (Metropolitan Area Network)
+поля - margins
+теги разметки - markup tags
+выделение памяти, распределение памяти - memory allocation
+объём памяти - memory capacity
+карта памяти - memory card
+топология сетки, ячеистая топология, многосвязная сеть - mesh topology
+метапоисковая система - Meta-Search engine
+процедура дезориентации - misdirection routine
+многоядерный процессор - multi-core CPU
+умножение - multiplication
+многозадачный - multi-tasking
+вложенные папки - nested folders
+безопасность в сети - network security
+топология сети - network topology (ring, star, bus, tree)
+сетевой брандмауэр - network-based firewall
+нейронная сеть - neural network
+узел, устройство подключенное к компьютерной сети - node
+энергонезависимый - non-volatile
+внешняя поисковая оптимизация - Off-Page SEO
+пакет офисных приложений - office suite (package)
+поисковая оптимизация страницы - On-Page SEO
+программы с открытым исходным кодом - open-source software
+естественные результаты (работы поисковой машины) - organic results
+модель взаимодействия открытых систем - OSI model (Open Systems Interconnection)
+блок вывода - output unit
+вирус перезаписи - overwriting virus
+пакетная коммутация (передача данных) - packet switching
+исходный код страницы - page source code
+частица - particle
+раздел на жёстком диске - partition
+полезная нагрузка - payload
+счётчик команд, программный счетчик - PC (Program Counter)
+одноранговая сеть - peer-to-peer architecture
+производительность - performance
+подключаемое оборудование - peripherals
+персональная сеть - PAN (Personal Area Network)
+повсеместные вычисления - pervasive computing
+фишинг, интернет-мошенничество - phishing
+несанкционированное проникновение вслед за зарегистрированным пользователем - piggybacking
+ячейка памяти у оптических дисков - pit
+открытый текст, незашифрованный текст - plaintext
+пластина жёсткого диска - platter
+блок питания - power-supply unit
+вытесняющая многозадачность - preemptive multitasking
+основное запоминающее устройство - primary storage
+закрытое программное обеспечение - proprietary software
+протокол в общем случае, набор правил - protocol
+перфокарта - punched card
+оперативное запоминающее устройство (ОЗУ) - RAM (Random Access Memory)
+ранжирование (у автоматизированного поисковика) - ranking
+программы-вымогатели - ransomware
+необработанные данные - raw data
+постоянное запоминающее устройство (ПЗУ) - ROM (Read Only Memory)
+головка чтения/записи - read-write head
+операционная система реального времени - real-time OS
+регистры процессора - registers (IR, PC)
+удалённый доступ - remote access
+процедура самокопирования/ воспроизводства - reproduction routine
+запрос - request/ query/ search string
+кольцевая топология - ring topology
+робототехника - robotics
+маршрутизатор - router
+спутниковая связь - satellite connection
+доступ к спутниковому интернету - satellite Internet access
+поисковая система - search engine
+база данных у поисковика - search index
+строка поиска - search box/ search bar
+меры безопасности - security measures
+полупроводник - semiconductor
+полупроводниковая технология - semiconductor technology
+конфиденциальные данные - sensitive data
+SEO (Search Engine Optimization) - SEO
+сеансовый уровень - session layer
+заливка - shading
+условно бесплатное ПО - shareware
+сигнатурное сканирование - signature-based scanning
+кремний - silicon
+одновременная многопоточность - SMT (Simultaneous MultiThreading)
+умные приборы - smart home appliances
+программное обеспечение - software
+твердотельная технология - solid state technology
+исходный код - source code
+колонки - speakers
+электронные таблицы - spreadsheets
+шпионские программы - spyware
+твердотельный накопитель - SSD (Solid State Drive)
+протокол защищённых соединений - SSL (Secure Sockets Layer)
+топология “звезда” - star topology
+устройство хранения данных - storage device
+носитель информации - storage medium
+потоковое видео - streaming video
+абоненты - subscribers
+суперкомпьютер - supercomputer
+организующая программа - supervisor program
+переключатель, коммутатор - switch
+тактовый генератор - system clock
+системный блок - system unit
+планшет - tablet
+операционная система с режимом разделения времени - timesharing operating systems
+архивировать - to archive
+переходить по подозрительной ссылке - to click a suspicious link
+отказать в доступе, отклонить доступ - to deny access
+редактировать - to edit
+шифровать данные - to encrypt data
+стирать (данные) - to erase/ delete/ remove
+предотвратить несанкционированный доступ - to prevent an unauthorized access
+запускать заражённую программу - to run an infected program
+распространять вирусы - to spread/ propagate viruses
+обновлять антивирусное ПО - to update antivirus software
+сенсорный экран - touch screen
+сенсорная панель - touchpad
+дорожка на CD/жёстком диске - track
+приемопередатчик - transceiver
+скорость передачи данных - transfer rate
+запуск, активация вируса - trigger
+Троянский конь - Trojan
+витая пара - twisted-pair cable
+протокол пользовательских дэйтаграмм - UDP (User Datagram Protocol)
+неавторизованный доступ, несанкционированный доступ - unauthorized access
+универсальный указатель ресурса - URL (Uniform Resource Locator)
+USB порт - USB (Universal Serial Bus) port
+флеш-накопитель - USB-flash drive / memory stick
+электронные лампы - vacuum tubes
+виртуальная клавиатура - virtual keyboard
+коммутация виртуальных каналов - virtual circuit switching
+энергозависимый - volatile
+напряжение - voltage
+виртуальная реальность - VR (Virtual Reality)
+конструктор веб-сайтов - website builder
+искажение информации на вебсайте - Website defacement
+вес (веса) - weight
+беспроводная локальная сеть - WLAN (Wireless Local Area Network)
+текстовый редактор - word processor
+червь - worm
+кэш с обратной (отложенной) записью - write-back cache
+кэш со сквозной записью - write-through cache
+2FA - Two-Factor Authentication
+ADSL - Asymmetric Digital Subscriber Line
+ALU - Arithmetic Logic Unit
+ANN - Artificial Neural Network
+AR - Augmented Reality
+ASCII - American Standard Code for Information Interchange
+BASIC - Beginner's All-purpose Symbolic Instruction Code
+BD - Blu-ray disc
+BIOS - Basic Input/Output System
+CAPTCHA - Completely Automated Public Turing test
+CD-R - Compact Disc Recordable
+CD-ROM - Compact Disc Read-Only Memory
+CD-RW - Compact Disc Rewritable
+CGI - Computer-Generated Image
+CLI - Command Line Interface
+CNN - Convolutional Neural Network
+CPU - Central Processing Unit
+CSS - Cascading Style Sheets
+DDoS - Distributed Denial of Service
+DDR4 - Double Data Rate 4
+DNS - Domain Name System
+DoS - Denial of Service
+DRAM - Dynamic Random Access Memory
+DSL - Digital Subscriber Line
+DVD - Digital Versatile Disc
+EEPROM - Electrically Erasable Programmable ROM
+ENIAC - Electronic Numerical Integrator and Computer
+EPROM - Erasable Programmable ROM
+FGT - Floating Gate Transistors
+FORTRAN - FORmula TRANslator
+FTP - File Transfer Protocol
+GB - Gigabyte
+GHz - Gigahertz
+GSM - Global System for Mobile Communications
+GUI - Graphical User Interface
+HDD - Hard Disk Drive
+HLAI - Human-Like Artificial Intelligence
+HTML - Hyper Text Markup Language
+HTTP - Hyper Text Transfer Protocol
+IBM - International Business Machines
+ICANN - Internet Corporation for Assigned Names and Numbers
+IoT - Internet of Things
+IR - Instruction Register
+ISDN - Integrated Services Digital Network
+ISP - Internet Service Provider
+JS - JavaScript
+JVM - Java Virtual Machine
+KB - Kilobyte
+LAN - Local Area Network
+LCD - Liquid Crystal Display
+MAC address - Media Access Control address
+MAN - Metropolitan Area Network
+MFA - Multi-Factor Authentication
+ML - Machine Learning
+MROM - Masked Read-Only Memory
+MS Word - Microsoft Word
+MS-DOS - Microsoft Disk Operating System
+NAND Flash - Not AND Flash
+NN - Neural Networks
+NOR Flash - Not OR Flash
+OOP - Object-Oriented Programming
+OS - Operating System
+OSI - Open System Interconnection
+PAN - Personal Area Network
+PC - Personal Computer / Program Counter
+PHP - Hypertext Preprocessor
+PROM - Programmable Read-Only Memory
+RAM - Random Access Memory
+RNN - Recurrent Neural Network
+ROM - Read-Only Memory
+SDRAM - Synchronous Dynamic RAM
+SDSL - Symmetric Digital Subscriber Line
+SEO - Search Engine Optimization
+SMT - Simultaneous Multi-threading
+SMTP - Simple Mail Transfer Protocol
+SQL - Structured Query Language
+SRAM - Static Random Access Memory
+SSD - Solid State Drive
+SSL - Secure Sockets Layer
+TB - Terabyte
+TCP/IP - Transmission Control Protocol/Internet Protocol
+UDP - User Datagram Protocol
+UIDs - Unique Identifiers
+UNIVAC I - Universal Automatic Computer
+URL - Uniform Resource Locator
+USB - Universal Serial Bus
+VDSL - Very High Bit Rate DSL
+VR - Virtual Reality
+WAF - Web Application Firewall
+WAN - Wide Area Network
+Wi-Fi - Wireless Fidelity
+WiMAX - Worldwide Interoperability for Microwave Access
+WIMP - Windows Icons Menus Pointer
+WLAN - Wireless Local Area Network
+WWW - World Wide Web
+WYSIWYG - What You See Is What You Get
+Yandex - Yet Another iNDEXer

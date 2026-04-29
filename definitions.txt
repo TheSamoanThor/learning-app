@@ -1,0 +1,106 @@
+Abacus - an ancient counting tool invented in China around 1300 BC used to perform basic arithmetical operations
+Analytical Engine - a mechanical computer designed by Charles Babbage in the 1830s, first machine resembling modern computers
+Arithmetic Logic Unit (ALU) - fundamental component of a processor for mathematical and logical operations
+Integrated Circuit (IC) - miniature electronic circuit on a single semiconductor substance
+Moore’s Law - computer processing power doubles approximately every two years
+Pascaline - first mechanical adding machine built by Blaise Pascal (1642-1644)
+Parallel processing - computing method where multiple processors perform calculations simultaneously
+Semiconductor - material like silicon whose conductivity increases with temperature
+Transistor - semiconductor that controls voltage/current flow, acts as a switch
+Vacuum tube - electronic device regulating electron movement in a vacuum, used in first-generation computers
+First-generation computers - 1940s, used vacuum tubes, enormous size, high electricity consumption
+Second-generation computers - late 1950s–early 1960s, used transistors, smaller and faster
+Third-generation computers - 1965–1972, built with integrated circuits
+Fourth-generation computers - mid-1970s–present, based on microprocessors, GUI, networks
+Fifth-generation computers - modern computers based on parallel processing and AI
+Desktop PC - personal computer for stationary use with system unit, monitor, keyboard, mouse
+Laptop - portable computer with hinged screen, built-in keyboard and touchpad
+Mainframe - powerful computer supporting many users and thousands of queries
+Server - central computer providing services to client workstations
+Supercomputer - fastest computer with tens of thousands of processors for data-intensive tasks
+Tablet PC - mobile device with touch screen interface
+Touchpad - sensitive pad on laptop to move pointer by touch
+BIOS (Basic Input/Output System) - firmware on motherboard for hardware initialization
+Bus - electrical channel for communication between computer components
+Central Processing Unit (CPU) - brain of the computer, executes instructions
+Clock speed - cycles per second a CPU executes (measured in GHz)
+Control Unit - CPU component that interprets instructions and directs hardware
+Motherboard - main circuit board holding CPU, memory, expansion slots
+RAM (Random Access Memory) - volatile main memory for temporary data storage
+ROM (Read Only Memory) - non-volatile memory with permanent instructions
+Cache memory - fast volatile memory acting as buffer between CPU and main memory
+Cache hit - processor finds data in cache
+Cache miss - processor does not find data in cache, reads from RAM
+Write-back cache - data changed in cache first, RAM updated later
+Write-through cache - cache and main memory refreshed simultaneously
+Flash memory - non-volatile memory using electronic circuits
+NAND flash - flash memory for SSDs and USB drives (slow access to large data)
+NOR flash - flash memory for bootloaders and firmware (fast access to small data)
+Optical storage - data written as reflective marks, read with laser
+Read/write head - HDD part that reads/writes data by magnetizing platters
+Transfer rate - average speed of data transmission between devices
+Operating system - set of programs managing hardware and providing user interface
+Open-source software - software that can be used, studied, changed, and shared
+Proprietary software - non-free software with restrictions on sharing/modification
+Spreadsheet - application for tabular data organization and analysis
+Word processor - application for composing and editing texts
+Preemptive multitasking - OS can interrupt a task to schedule another
+Cooperative multitasking - OS never initiates context switch; tasks yield control voluntarily
+Topology - configuration of network elements (nodes)
+Local Area Network (LAN) - devices connected in one physical location
+Wide Area Network (WAN) - network covering large geographical area
+Router - device that forwards data packets between networks
+Gateway - device enabling communication between networks using different protocols
+Latency - time delay between user action and system response
+Modem - converts digital data to analog for transmission over telephone lines
+Wireless LAN (WLAN) - wireless network using Wi-Fi radio signals
+OSI model - framework explaining how computer systems communicate over a network
+MAC address - unique identifier for every network device
+IP address - unique number assigned to every device connected to the internet
+Bluetooth - wireless technology for short-distance communication
+Coaxial cable - cable with inner conductor, insulation, shield, jacket
+Digital Subscriber Line (DSL) - broadband technology over telephone lines
+Fiber-optic technology - transmits data as light pulses through glass/plastic fibers
+Bandwidth - measure of data that can pass through a connection per second
+Cellular network - radio-based network distributed over cells served by towers
+Dial-up connection - slowest internet access using standard phone line and analog modem
+TCP/IP stack - four-layer protocol model governing data transmission on the Internet
+World Wide Web (WWW) - information system accessed via URLs
+Web crawler - program that browses the web to discover new content for search index
+Meta-search engine - sends queries to several search engines and compiles results
+Search bar - field to enter keywords for finding content
+Web browser - software gateway to the World Wide Web
+HTML - code describing structure of information on a webpage
+CSS - mechanism for adding style (fonts, colors, spacing) to web documents
+JavaScript - language for dynamic content, animations, clickable buttons
+SEO - set of improvements to increase site visibility and ranking
+Website builder - platform to create websites without coding
+Assembly language - low-level language using symbolic instructions
+Object-oriented programming (OOP) - paradigm based on classes and objects
+Compiler - program that converts source code into object code at once
+Interpreter - translates source code line by line at runtime
+Inheritance - ability of a class to use properties of another class
+Encapsulation - combining data and methods into a single unit
+Debugging - detecting and correcting errors in programs
+Spyware - malware that gathers and forwards user data without consent
+Adware - malware that displays unwanted commercials
+Keylogger - spyware that records keystrokes to steal passwords
+Worm - standalone malware that replicates to infect other computers
+Trojan - malware pretending to be a useful program
+Phishing - fake message tricking users to reveal sensitive information
+Ransomware - malware that encrypts data or blocks access until payment
+Backdoor - illicit program allowing unauthorized entry
+Firewall - hardware/software protecting private networks by filtering traffic
+Heuristic scanning - malware detection without exact signature match
+Encryption - encoding data so only authorized parties can read it
+Multi-factor authentication (MFA) - verification requiring more than one validation type
+Secure Sockets Layer (SSL) - protocol for encrypted communication over a network
+Artificial Intelligence (AI) - technology simulating human intelligence in computers
+Internet of Things (IoT) - system of interconnected devices sharing data to automate processes
+Virtual Reality (VR) - computer-generated space with 3D simulation
+Neural Networks (NN) - computing systems with interconnected nodes resembling neurons
+Augmented Reality (AR) - real world enhanced with digital information
+Machine Learning (ML) - software that learns from data to make predictions
+Backpropagation - algorithm that tests errors from output nodes back to input nodes
+Unique Identifier (UID) - string assigned to distinguish an entity in a system
+Turing Test - test of whether a computer can show human-like intelligent behavior
