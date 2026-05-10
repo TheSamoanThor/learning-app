@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>I dunno wat dis shi is</title>
+  <title>LingoTrain — аудио-тренажёр с произношением</title>
   <style>
     * {
       margin: 0;
@@ -18,7 +18,6 @@
       padding: 20px;
     }
 
-    /* основной контейнер с двумя колонками */
     .app-layout {
       max-width: 1400px;
       margin: 0 auto;
@@ -28,7 +27,6 @@
       margin-top: 10vh;
     }
 
-    /* ===== БОКОВАЯ ПАНЕЛЬ (НАСТРОЙКИ) ===== */
     .sidebar {
       flex: 0 0 280px;
       background: rgba(255, 255, 255, 0.9);
@@ -39,6 +37,7 @@
       height: 75vh;
       position: sticky;
       top: 20px;
+      overflow-y: auto;
     }
 
     .sidebar h3 {
@@ -49,7 +48,6 @@
       border-left: 3px solid #3b82f6;
       padding-left: 10px;
     }
-
     .sidebar h3:first-of-type {
       margin-top: 0;
     }
@@ -116,7 +114,6 @@
     }
     .small-action:hover { background: #cbd5e1; }
 
-    /* ===== ОСНОВНАЯ ЗОНА (ЦЕНТР) ===== */
     .main-content {
       flex: 1;
       min-width: 280px;
@@ -159,7 +156,6 @@
       color: transparent;
     }
 
-    /* улучшенная сетка вариантов — равномерная, адаптивная */
     .options-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -197,7 +193,6 @@
       text-decoration: line-through;
     }
 
-    /* режим ввода */
     .input-area {
       max-width: 400px;
       margin: 1rem auto;
@@ -258,6 +253,44 @@
       border-top: 1px solid #e2e8f0;
       padding-top: 1rem;
     }
+    
+    .audio-badge {
+      margin-top: 8px;
+      font-size: 0.75rem;
+      background: #eef2ff;
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 40px;
+      color: #1e40af;
+    }
+
+    /* кнопка озвучить термин */
+    .speak-term-btn {
+      background: #3b82f6;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 60px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.2s;
+      margin-top: 12px;
+      width: auto;
+      max-width: 200px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      justify-content: center;
+    }
+    .speak-term-btn:hover { background: #2563eb; transform: scale(0.98); }
+    .speak-term-btn:active { transform: scale(0.95); }
+    .button-group {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
 
     @media (max-width: 800px) {
       .app-layout { flex-direction: column; }
@@ -265,145 +298,10 @@
       .options-grid { grid-template-columns: 1fr; }
       .question-word { font-size: 1.8rem; }
     }
-
-  /* ===== ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ДЛЯ ТЕЛЕФОНОВ ===== */
-  @media (max-width: 600px) {
-    body {
-      padding: 12px;
-    }
-
-    .app-layout {
-      gap: 16px;
-      margin-top: 0; /* убираем отступ сверху */
-    }
-
-    /* Боковая панель на телефоне — компактная, без фиксированной высоты */
-    .sidebar {
-      flex: auto;
-      width: 100%;
-      height: auto;
-      position: static;
-      padding: 1rem;
-      border-radius: 1.5rem;
-    }
-
-    .sidebar h3 {
-      font-size: 1rem;
-      margin: 0.8rem 0 0.4rem 0;
-    }
-
-    .btn-group {
-      gap: 6px;
-    }
-
-    .mode-btn, .type-btn, .dir-btn, .small-action {
-      padding: 12px 12px; /* увеличиваем область касания */
-      font-size: 0.9rem;
-      justify-content: center; /* центрируем текст и иконки */
-      text-align: center;
-    }
-
-    .small-action {
-      margin-top: 4px;
-    }
-
-    /* Карточка вопроса */
-    .quiz-card {
-      height: auto;
-      min-height: auto;
-      padding: 1.5rem;
-      border-radius: 1.5rem;
-    }
-
-    .question-header {
-      font-size: 0.8rem;
-    }
-
-    .question-word {
-      font-size: 1.5rem;
-      margin: 0.3rem 0;
-    }
-
-    /* Сетка вариантов — одна колонка, кнопки крупнее */
-    .options-grid {
-      grid-template-columns: 1fr;
-      gap: 12px;
-      margin: 1rem 0;
-    }
-
-    .option-btn {
-      padding: 14px 12px;
-      font-size: 0.9rem;
-    }
-
-    /* Поле ввода и кнопки */
-    .input-area {
-      margin: 0.5rem auto;
-      width: 100%;
-    }
-
-    #answerInput {
-      padding: 14px 16px;
-      font-size: 0.95rem;
-    }
-
-    .action-btn {
-      padding: 12px 20px;
-      font-size: 0.95rem;
-      max-width: 100%;
-    }
-
-    /* Статистика — возможно перенос строк */
-    .stats-bar {
-      flex-wrap: wrap;
-      gap: 8px;
-      justify-content: center;
-      padding: 10px 16px;
-      font-size: 0.8rem;
-    }
-
-    .hotkey-hint {
-      font-size: 0.65rem;
-      padding-top: 0.8rem;
-    }
-
-    /* Фидбек */
-    .feedback {
-      font-size: 0.85rem;
-      padding: 8px;
-    }
-
-    /* Корректировка отступов для кнопки следующего вопроса */
-    #nextBtn {
-      margin-top: 12px;
-      font-size: 0.95rem;
-    }
-  }
-
-  /* Для очень маленьких экранов (≤ 380px) ещё мельче */
-  @media (max-width: 380px) {
-    .question-word {
-      font-size: 1.3rem;
-    }
-
-    .option-btn, .mode-btn, .type-btn, .dir-btn {
-      font-size: 0.85rem;
-      padding: 10px;
-    }
-
-    .stats-bar {
-      font-size: 0.7rem;
-    }
-
-    .sidebar {
-      padding: 0.8rem;
-    }
-  }
   </style>
 </head>
 <body>
 <div class="app-layout">
-  <!-- БОКОВАЯ ПАНЕЛЬ НАСТРОЕК -->
   <div class="sidebar">
     <div class="file-section">
       <label class="file-label">
@@ -411,6 +309,7 @@
         <input type="file" id="fileInput" accept=".txt">
       </label>
       <div class="word-count" id="wordCountDisplay">записей: 0</div>
+      <div class="audio-badge" id="audioStatus">🔊 Аудио: из папки audio_terms/</div>
     </div>
 
     <h3>📌 Тип контента</h3>
@@ -436,18 +335,15 @@
     <button id="resetStatsBtn" class="small-action">♻️ Сброс статистики</button>
   </div>
 
-  <!-- ЦЕНТРАЛЬНАЯ ОБЛАСТЬ ВОПРОСА -->
   <div class="main-content">
     <div class="quiz-card">
       <div class="question-header" id="questionHint">📖 Дайте определение</div>
       <div class="question-word" id="questionText">—</div>
 
-      <!-- Режим выбора вариантов (видим по умолчанию) -->
       <div id="choiceModeContainer">
         <div class="options-grid" id="optionsGrid"></div>
       </div>
 
-      <!-- Режим точного ввода -->
       <div id="inputModeContainer" style="display: none;">
         <div class="input-area">
           <input type="text" id="answerInput" placeholder="Введите ответ..." autocomplete="off">
@@ -455,7 +351,10 @@
         </div>
       </div>
 
-      <button id="nextBtn" class="action-btn" disabled>➡️ Следующее слово → (Enter после ответа)</button>
+      <div class="button-group">
+        <button id="nextBtn" class="action-btn" disabled>➡️ Следующее слово (Enter)</button>
+        <button id="speakTermBtn" class="speak-term-btn" style="display: none;">🔊 Озвучить термин</button>
+      </div>
       <div id="feedbackArea" class="feedback"></div>
 
       <div class="stats-bar">
@@ -464,22 +363,22 @@
         <span>📌 Прогресс: <strong id="progressIndex">0</strong> / <span id="totalWordsSpan">0</span></span>
       </div>
       <div class="hotkey-hint">
-        ⌨️ Горячие клавиши: <strong>Enter</strong> — проверить / след. шаг (после ответа) | <strong>1-4</strong> — выбор варианта
+        ⌨️ Горячие клавиши: <strong>Enter</strong> — проверить / след. шаг | <strong>1-4</strong> — выбор ответа
       </div>
     </div>
   </div>
 </div>
 
 <script>
-  // ========== ГЛОБАЛЬНЫЕ ДАННЫЕ ==========
-  let items = [];            // { term, definition }
+  // ========== ГЛОБАЛЬНЫЕ ==========
+  let items = [];
   let currentIndex = 0;
   let correctAnswers = 0;
   let totalAnswered = 0;
   let isAnswered = false;
-  let currentMode = "choice";      // "input" или "choice"
-  let currentDirection = "forward"; // "forward": term->def, "reverse": def->term
-  let currentType = "definition";   // "translation" / "definition"
+  let currentMode = "choice";
+  let currentDirection = "forward";
+  let currentType = "definition";
   let currentCorrectAnswer = "";
   let currentQuestionWord = "";
   let currentOptions = [];
@@ -495,6 +394,7 @@
   const answerInput = document.getElementById("answerInput");
   const checkAnswerBtn = document.getElementById("checkAnswerBtn");
   const nextBtn = document.getElementById("nextBtn");
+  const speakTermBtn = document.getElementById("speakTermBtn");
   const correctCountSpan = document.getElementById("correctCount");
   const totalAnsweredSpan = document.getElementById("totalAnswered");
   const progressIndexSpan = document.getElementById("progressIndex");
@@ -502,13 +402,75 @@
   const feedbackArea = document.getElementById("feedbackArea");
   const shuffleBtn = document.getElementById("shuffleBtn");
   const resetStatsBtn = document.getElementById("resetStatsBtn");
+  const audioStatusSpan = document.getElementById("audioStatus");
 
-  // Кнопки переключения
   const typeBtns = document.querySelectorAll(".type-btn");
   const modeBtns = document.querySelectorAll(".mode-btn");
   const dirBtns = document.querySelectorAll(".dir-btn");
 
-  // ========== УТИЛИТЫ ==========
+  // ========== АУДИО ПРОИГРЫВАТЕЛЬ (MP3 из папки audio_terms) ==========
+  let audioElement = null;
+  let lastPlayedIndex = -1;
+
+  function playTermAudio(index1based) {
+    // index1based — номер строки в списке (1, 2, 3...)
+    if (!items.length) return;
+    if (index1based < 1 || index1based > items.length) return;
+    
+    // путь к аудио: audio_terms/timbrica-speech (N).mp3
+    // где N = индекс от 0? в ваших файлах (0).mp3, (1).mp3 и т.д.
+    // сопоставляем: строка 1 -> timbrica-speech (0).mp3
+    const audioIndex = index1based - 1;
+    const audioFileName = `audio_terms/timbrica-speech (${audioIndex}).mp3`;
+    
+    if (!audioElement) {
+      audioElement = new Audio();
+      audioElement.onerror = () => {
+        console.warn(`Аудио не загружено: ${audioFileName}`);
+        if (audioStatusSpan) {
+          audioStatusSpan.innerText = "⚠️ Аудио не найдено";
+          setTimeout(() => {
+            if (audioStatusSpan.innerText === "⚠️ Аудио не найдено") 
+              audioStatusSpan.innerText = "🔊 Аудио: из папки audio_terms/";
+          }, 1500);
+        }
+      };
+      audioElement.oncanplay = () => {
+        if (audioStatusSpan) audioStatusSpan.innerText = "🔊 Произношение...";
+      };
+      audioElement.onended = () => {
+        if (audioStatusSpan && !audioStatusSpan.innerText.includes("Аудио не найдено")) 
+          audioStatusSpan.innerText = "🔊 Аудио: из папки audio_terms/";
+      };
+    }
+    
+    if (lastPlayedIndex === audioIndex && !audioElement.paused) return;
+    
+    audioElement.pause();
+    audioElement.src = audioFileName;
+    audioElement.load();
+    lastPlayedIndex = audioIndex;
+    
+    audioElement.play().catch(e => {
+      console.warn(`Не удалось воспроизвести ${audioFileName}:`, e);
+      if (audioStatusSpan) {
+        audioStatusSpan.innerText = "❌ Аудио-ошибка";
+        setTimeout(() => {
+          if (audioStatusSpan.innerText === "❌ Аудио-ошибка") 
+            audioStatusSpan.innerText = "🔊 Аудио: из папки audio_terms/";
+        }, 1200);
+      }
+    });
+  }
+
+  // Озвучить текущий термин (по номеру строки)
+  function speakCurrentTerm() {
+    if (!items.length) return;
+    const termIndex = currentIndex + 1;
+    playTermAudio(termIndex);
+  }
+
+  // ========== ОСНОВНАЯ ЛОГИКА ==========
   function normalizeString(str) {
     return str.trim().toLowerCase().replace(/\s+/g, ' ');
   }
@@ -521,7 +483,6 @@
     wordCountDisplay.innerText = `записей: ${items.length}`;
   }
 
-  // Получить текущий вопрос и правильный ответ
   function getCurrentQA() {
     if (!items.length) return { question: "", answer: "" };
     const item = items[currentIndex];
@@ -532,7 +493,6 @@
     }
   }
 
-  // Генерация вариантов (только для режима выбора)
   function generateOptions(correctAns, excludeIndex) {
     let candidates = [];
     for (let i = 0; i < items.length; i++) {
@@ -540,11 +500,9 @@
       let candidate = (currentDirection === "forward") ? items[i].definition : items[i].term;
       candidates.push(candidate);
     }
-    // уникальные значения
     let uniqueMap = new Map();
     candidates.forEach(c => { if (!uniqueMap.has(normalizeString(c))) uniqueMap.set(normalizeString(c), c); });
     let unique = Array.from(uniqueMap.values());
-    // случайный порядок
     for (let i = unique.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [unique[i], unique[j]] = [unique[j], unique[i]];
@@ -555,7 +513,6 @@
       if (normalizeString(u) !== normalizeString(correctAns)) opts.push(u);
     }
     while (opts.length < 4) opts.push(correctAns);
-    // финальное перемешивание
     for (let i = opts.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [opts[i], opts[j]] = [opts[j], opts[i]];
@@ -563,7 +520,6 @@
     return opts;
   }
 
-  // Отрисовка вариантов в режиме выбора
   function renderOptions(options) {
     optionsGrid.innerHTML = "";
     options.forEach((opt, idx) => {
@@ -599,7 +555,12 @@
       feedbackArea.style.color = "#991b1b";
     }
 
-    // Визуальная подсветка для режима выбора
+    // АВТОМАТИЧЕСКОЕ ОЗВУЧИВАНИЕ ТЕРМИНА после ответа
+    speakCurrentTerm();
+
+    // Показать кнопку "Озвучить термин" (можно повторно нажать)
+    speakTermBtn.style.display = "inline-flex";
+
     if (currentMode === "choice") {
       const btns = document.querySelectorAll(".option-btn");
       btns.forEach(btn => {
@@ -618,11 +579,9 @@
 
     updateStatsUI();
     nextBtn.disabled = false;
-    // Фокус на следующую кнопку (удобно)
     nextBtn.focus();
   }
 
-  // Переход к следующему вопросу
   function nextQuestion() {
     if (!items.length) return;
     if (!isAnswered) {
@@ -632,15 +591,17 @@
     }
     currentIndex = (currentIndex + 1) % items.length;
     isAnswered = false;
+    // скрываем кнопку озвучивания для нового вопроса
+    speakTermBtn.style.display = "none";
     renderCurrentQuestion();
   }
 
-  // Полная отрисовка текущего вопроса
   function renderCurrentQuestion() {
     if (!items.length) {
       questionTextEl.innerText = "📂 Загрузите файл";
       questionHint.innerText = "Нет данных";
       nextBtn.disabled = true;
+      speakTermBtn.style.display = "none";
       if (inputModeContainer.style.display !== 'none') answerInput.disabled = true;
       return;
     }
@@ -650,14 +611,12 @@
     currentCorrectAnswer = answer;
     questionTextEl.innerText = question;
 
-    // Настройка подсказки
     if (currentType === "definition") {
       questionHint.innerText = (currentDirection === "forward") ? "📖 Дайте определение термину" : "🔍 Какой термин соответствует определению?";
     } else {
       questionHint.innerText = (currentDirection === "forward") ? "🌍 Переведите на другой язык" : "🔤 Как переводится это слово?";
     }
 
-    // Переключение режимов отображения
     if (currentMode === "input") {
       inputModeContainer.style.display = "block";
       choiceModeContainer.style.display = "none";
@@ -708,7 +667,6 @@
       }
       items = newItems;
       currentType = autoType;
-      // обновить активную кнопку типа
       typeBtns.forEach(btn => {
         if (btn.dataset.type === currentType) btn.classList.add("active");
         else btn.classList.remove("active");
@@ -717,11 +675,12 @@
       correctAnswers = 0;
       totalAnswered = 0;
       isAnswered = false;
+      speakTermBtn.style.display = "none";
       renderCurrentQuestion();
       localStorage.setItem("lingotrain_items", JSON.stringify(items));
       localStorage.setItem("lingotrain_type", currentType);
-      feedbackArea.innerHTML = `✅ Загружено ${items.length} записей (режим: ${currentType === "definition" ? "Определения" : "Переводы"})`;
-      setTimeout(() => { if (feedbackArea.innerHTML.includes("Загружено")) feedbackArea.innerHTML = ""; }, 2000);
+      feedbackArea.innerHTML = `✅ Загружено ${items.length} записей<br>🎵 Аудио из папки audio_terms/timbrica-speech (N).mp3`;
+      setTimeout(() => { if (feedbackArea.innerHTML.includes("Загружено")) feedbackArea.innerHTML = ""; }, 3000);
     };
     reader.readAsText(file, "UTF-8");
   }
@@ -752,6 +711,7 @@
     totalAnswered = 0;
     isAnswered = false;
     currentIndex = 0;
+    speakTermBtn.style.display = "none";
     renderCurrentQuestion();
     feedbackArea.innerHTML = "📊 Статистика сброшена. Начинаем сначала!";
     setTimeout(() => { if (feedbackArea.innerHTML.includes("сброшена")) feedbackArea.innerHTML = ""; }, 1500);
@@ -767,13 +727,13 @@
     correctAnswers = 0;
     totalAnswered = 0;
     isAnswered = false;
+    speakTermBtn.style.display = "none";
     renderCurrentQuestion();
     feedbackArea.innerHTML = "🃏 Слова перемешаны!";
     setTimeout(() => { if (feedbackArea.innerHTML.includes("перемешаны")) feedbackArea.innerHTML = ""; }, 1200);
     localStorage.setItem("lingotrain_items", JSON.stringify(items));
   }
 
-  // Переключение настроек
   function setType(type) {
     currentType = type;
     localStorage.setItem("lingotrain_type", type);
@@ -800,10 +760,9 @@
     if (items.length) renderCurrentQuestion();
   }
 
-  // ========== КЛАВИАТУРНЫЕ БИНДЫ ==========
+  // ========== КЛАВИАТУРА ==========
   function handleGlobalKey(e) {
     if (!items.length) return;
-    // Если активен режим выбора и ещё не отвечено, цифры 1-4
     if (currentMode === "choice" && !isAnswered) {
       const key = e.key;
       if (key >= '1' && key <= '4') {
@@ -815,7 +774,6 @@
         }
       }
     }
-    // Enter: если не отвечено и режим ввода — проверка; если отвечено — следующий вопрос
     if (e.key === "Enter") {
       e.preventDefault();
       if (!isAnswered) {
@@ -823,9 +781,6 @@
           const ans = answerInput.value.trim();
           if (ans) handleAnswer(ans);
           else feedbackArea.innerHTML = "✏️ Введите ответ!";
-        } else if (currentMode === "choice") {
-          // в режиме выбора Enter ничего не делает (пользователь должен выбрать вариант)
-          return;
         }
       } else {
         nextQuestion();
@@ -836,6 +791,7 @@
   // ========== ИНИЦИАЛИЗАЦИЯ ==========
   fileInput.addEventListener("change", (e) => { if (e.target.files.length) loadFile(e.target.files[0]); });
   nextBtn.addEventListener("click", nextQuestion);
+  speakTermBtn.addEventListener("click", () => speakCurrentTerm());
   checkAnswerBtn.addEventListener("click", () => {
     if (isAnswered || !items.length) return;
     const ans = answerInput.value.trim();
