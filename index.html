@@ -688,31 +688,22 @@
 </head>
 <body>
 
-<!-- ══════════════════════════════════
-     HEADER
-══════════════════════════════════ -->
 <header class="app-header">
   <div class="logo">Lingo<span>Train</span></div>
 
-  <!-- Desktop tabs -->
   <div class="header-tabs">
     <button class="tab-btn active" id="tabTrain" onclick="switchTab('train')">🎯 Тренировка</button>
     <button class="tab-btn"        id="tabLists" onclick="switchTab('lists')">📋 Списки</button>
   </div>
 
-  <!-- Right controls -->
   <div class="header-right">
     <button class="icon-btn" id="ttsToggleBtn" onclick="toggleTTS()" title="Озвучка">🔊</button>
     <button class="icon-btn" id="themeBtn"     onclick="toggleTheme()" title="Тема">🌙</button>
   </div>
 </header>
 
-<!-- ══════════════════════════════════
-     BODY
-══════════════════════════════════ -->
 <div class="app-body">
 
-  <!-- SIDEBAR (desktop only) -->
   <nav class="sidebar">
     <div class="sb-section">
       <div class="sb-title">Файл</div>
@@ -755,14 +746,11 @@
     </div>
   </nav>
 
-  <!-- CONTENT -->
   <div class="content-area">
 
-    <!-- TRAIN VIEW -->
     <div class="train-view" id="trainView">
       <div class="quiz-card">
 
-        <!-- Practice banner -->
         <div class="practice-banner" id="practiceBanner" style="display:none">
           <span id="practiceBannerText">Практика</span>
           <button onclick="exitPracticeMode()">✕ Выйти</button>
@@ -775,19 +763,16 @@
 
         <div class="question-word" id="questionText">📂 Загрузите .txt файл</div>
 
-        <!-- Knowledge bar -->
         <div class="knowledge-bar" id="knowledgeBar" style="display:none">
           <button class="know-btn hard"    id="knowHard"    onclick="markWord('hard')">😤 Сложно</button>
           <button class="know-btn medium"  id="knowMedium"  onclick="markWord('medium')">🙂 Нормально</button>
           <button class="know-btn learned" id="knowLearned" onclick="markWord('learned')">✅ Выучено</button>
         </div>
 
-        <!-- Choice mode -->
         <div id="choiceModeContainer">
           <div class="options-grid" id="optionsGrid"></div>
         </div>
 
-        <!-- Input mode -->
         <div id="inputModeContainer" style="display:none">
           <div class="input-area">
             <input type="text" id="answerInput" placeholder="Введите ответ…" autocomplete="off" spellcheck="false" autocorrect="off" autocapitalize="none">
@@ -813,10 +798,19 @@
       </div>
     </div>
 
-    <!-- LISTS VIEW -->
     <div class="lists-view" id="listsView">
       <div class="lists-header">📋 Мои списки слов</div>
       <div class="lists-grid">
+
+        <div class="list-panel">
+          <div class="list-panel-head">
+            <div class="list-panel-title">👁️ Непрочитанные</div>
+            <div class="list-count" id="unreadCount">0</div>
+          </div>
+          <div class="list-words" id="unreadList"></div>
+          <div class="list-empty" id="unreadEmpty">Пока пусто</div>
+          <button class="btn-practice-list" id="practiceUnreadBtn" onclick="startPractice('unread')" disabled>🎯 Тренировать</button>
+        </div>
 
         <div class="list-panel">
           <div class="list-panel-head">
@@ -851,13 +845,7 @@
       </div>
     </div>
 
-  </div><!-- /content-area -->
-</div><!-- /app-body -->
-
-<!-- ══════════════════════════════════
-     BOTTOM NAV (mobile)
-══════════════════════════════════ -->
-<nav class="bottom-nav">
+  </div></div><nav class="bottom-nav">
   <div class="bottom-nav-inner">
     <button class="bnav-btn active" id="bnavTrain" onclick="switchTab('train')">
       <span class="bnav-icon">🎯</span>Тренировка
@@ -871,9 +859,6 @@
   </div>
 </nav>
 
-<!-- ══════════════════════════════════
-     SETTINGS DRAWER (mobile)
-══════════════════════════════════ -->
 <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
 <div class="drawer" id="drawer">
   <div class="drawer-handle"></div>
@@ -926,9 +911,6 @@
   </div>
 </div>
 
-<!-- ══════════════════════════════════
-     SCRIPT
-══════════════════════════════════ -->
 <script>
 // ═══════════════════════════════════════
 // STATE
@@ -948,7 +930,7 @@ let practiceMode = null;
 let ttsEnabled   = true;
 let currentTheme = "dark";
 
-let knowledgeLists = { hard: [], medium: [], learned: [] };
+let knowledgeLists = { unread: [], hard: [], medium: [], learned: [] };
 
 // ═══════════════════════════════════════
 // DOM
@@ -1076,25 +1058,33 @@ function saveKnowledgeLists() {
 function loadKnowledgeLists() {
   try {
     const s = localStorage.getItem("lingotrain_knowledge");
-    if (s) knowledgeLists = JSON.parse(s);
+    if (s) {
+      const parsed = JSON.parse(s);
+      knowledgeLists.hard = parsed.hard || [];
+      knowledgeLists.medium = parsed.medium || [];
+      knowledgeLists.learned = parsed.learned || [];
+      knowledgeLists.unread = parsed.unread || [];
+    }
   } catch(e) {}
 }
 
 function markWord(level) {
   if (!items.length || !isAnswered) return;
   const item = items[currentIndex];
-  ["hard","medium","learned"].forEach(l => {
+  ["unread", "hard","medium","learned"].forEach(l => {
     knowledgeLists[l] = knowledgeLists[l].filter(w => w.term !== item.term);
   });
   knowledgeLists[level].push({ term: item.term, definition: item.definition });
   saveKnowledgeLists();
   [knowHard, knowMedium, knowLearned].forEach(b => b.classList.remove("selected"));
-  ({ hard: knowHard, medium: knowMedium, learned: knowLearned })[level].classList.add("selected");
+  if (level !== "unread") {
+    ({ hard: knowHard, medium: knowMedium, learned: knowLearned })[level].classList.add("selected");
+  }
   updateStatsUI();
 }
 
 function renderLists() {
-  ["hard","medium","learned"].forEach(level => {
+  ["unread", "hard","medium","learned"].forEach(level => {
     const list = knowledgeLists[level];
     const container = document.getElementById(level + "List");
     const empty     = document.getElementById(level + "Empty");
@@ -1114,7 +1104,10 @@ function renderLists() {
 }
 
 function removeWord(level, i) {
-  knowledgeLists[level].splice(i, 1);
+  const removedItem = knowledgeLists[level].splice(i, 1)[0];
+  if (level !== "unread") {
+    knowledgeLists.unread.push(removedItem);
+  }
   saveKnowledgeLists();
   renderLists();
   updateStatsUI();
@@ -1134,7 +1127,7 @@ function startPractice(level) {
   items = list.map(w => ({ term: w.term, definition: w.definition }));
   resetSession();
 
-  const labels = { hard: "😤 Сложные слова", medium: "🙂 «Нормально»", learned: "✅ Выученные" };
+  const labels = { unread: "👁️ Непрочитанные", hard: "😤 Сложные слова", medium: "🙂 «Нормально»", learned: "✅ Выученные" };
   practiceBanner.style.display = "flex";
   practiceBannerText.textContent = "Практика: " + labels[level];
   exitPracticeBtn.style.display = "flex";
@@ -1247,7 +1240,7 @@ function handleAnswer(userAnswer) {
   if (isCorrect) {
     knowLearned.classList.add("selected");
     const item = items[currentIndex];
-    ["hard","medium","learned"].forEach(l => {
+    ["unread", "hard","medium","learned"].forEach(l => {
       knowledgeLists[l] = knowledgeLists[l].filter(w => w.term !== item.term);
     });
     knowledgeLists.learned.push({ term: item.term, definition: item.definition });
@@ -1360,6 +1353,14 @@ function applyLoadedData(newItems, autoType, sourceName) {
   allItems = newItems;
   items    = newItems;
   currentType = autoType;
+  
+  knowledgeLists.unread = allItems.filter(item =>
+    !knowledgeLists.hard.some(w => w.term === item.term) &&
+    !knowledgeLists.medium.some(w => w.term === item.term) &&
+    !knowledgeLists.learned.some(w => w.term === item.term)
+  );
+  saveKnowledgeLists();
+
   typeBtns.forEach(b => b.classList.toggle("active", b.dataset.type === currentType));
   practiceMode = null;
   practiceBanner.style.display = "none";
@@ -1418,6 +1419,14 @@ function loadFromStorage() {
     if (!saved) return;
     allItems = JSON.parse(saved);
     items    = allItems;
+
+    knowledgeLists.unread = allItems.filter(item =>
+      !knowledgeLists.hard.some(w => w.term === item.term) &&
+      !knowledgeLists.medium.some(w => w.term === item.term) &&
+      !knowledgeLists.learned.some(w => w.term === item.term)
+    );
+    saveKnowledgeLists();
+
     currentType      = localStorage.getItem("lingotrain_type") || "translation";
     currentMode      = localStorage.getItem("lingotrain_mode") || "choice";
     currentDirection = localStorage.getItem("lingotrain_dir")  || "forward";
