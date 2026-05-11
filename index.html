@@ -628,6 +628,9 @@
     .bottom-nav-inner {
       display: flex;
       height: 100%;
+      justify-content: space-between;
+      margin: auto;
+      gap: 50px;
     }
     .bnav-btn {
       flex: 1;
@@ -661,7 +664,7 @@
     @media (max-width: 680px) {
       .sidebar { display: none !important; }
       .header-tabs { display: none !important; }
-      .bottom-nav { display: flex !important; }
+      .bottom-nav { display: flex !important;}
       .options-grid { grid-template-columns: 1fr; }
       .lists-grid { grid-template-columns: 1fr; }
       .quiz-card { border-radius: var(--radius); }
