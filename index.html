@@ -657,6 +657,25 @@
     return { items: parsed, autoType: isDefinitionMode ? "definition" : "translation" };
   }
 
+  function applyLoadedData(newItems, autoType, sourceName) {
+    items = newItems;
+    currentType = autoType;
+    typeBtns.forEach(btn => {
+      if (btn.dataset.type === currentType) btn.classList.add("active");
+      else btn.classList.remove("active");
+    });
+    currentIndex = 0;
+    correctAnswers = 0;
+    totalAnswered = 0;
+    isAnswered = false;
+    speakTermBtn.style.display = "none";
+    renderCurrentQuestion();
+    localStorage.setItem("lingotrain_items", JSON.stringify(items));
+    localStorage.setItem("lingotrain_type", currentType);
+    feedbackArea.innerHTML = `✅ Загружено ${items.length} записей (${sourceName})`;
+    setTimeout(() => { if (feedbackArea.innerHTML.includes("Загружено")) feedbackArea.innerHTML = ""; }, 3000);
+  }
+
   function loadFile(file) {
     const reader = new FileReader();
     reader.onload = (e) => {
@@ -665,22 +684,7 @@
         alert("Файл не содержит пар в формате 'термин - определение' или 'слово - перевод'");
         return;
       }
-      items = newItems;
-      currentType = autoType;
-      typeBtns.forEach(btn => {
-        if (btn.dataset.type === currentType) btn.classList.add("active");
-        else btn.classList.remove("active");
-      });
-      currentIndex = 0;
-      correctAnswers = 0;
-      totalAnswered = 0;
-      isAnswered = false;
-      speakTermBtn.style.display = "none";
-      renderCurrentQuestion();
-      localStorage.setItem("lingotrain_items", JSON.stringify(items));
-      localStorage.setItem("lingotrain_type", currentType);
-      feedbackArea.innerHTML = `✅ Загружено ${items.length} записей<br>🎵 Аудио из папки audio_terms/timbrica-speech (N).mp3`;
-      setTimeout(() => { if (feedbackArea.innerHTML.includes("Загружено")) feedbackArea.innerHTML = ""; }, 3000);
+      applyLoadedData(newItems, autoType, "выбранный файл");
     };
     reader.readAsText(file, "UTF-8");
   }
@@ -788,6 +792,42 @@
     }
   }
 
+    // ========== АВТОЗАГРУЗКА ИЗ ПАПКИ ==========
+    async function autoLoadFromFolder() {
+    const filesToTry = ["definitions.txt", "dictionary.txt", "english_terms.txt"];
+    for (const fileName of filesToTry) {
+      try {
+        const response = await fetch(fileName);
+        if (response.ok) {
+          const text = await response.text();
+          const { items: newItems, autoType } = parseFile(text);
+          if (newItems.length > 0) {
+            items = newItems;
+            currentType = autoType;
+            typeBtns.forEach(btn => {
+              if (btn.dataset.type === currentType) btn.classList.add("active");
+              else btn.classList.remove("active");
+            });
+            currentIndex = 0;
+            correctAnswers = 0;
+            totalAnswered = 0;
+            isAnswered = false;
+            speakTermBtn.style.display = "none";
+            renderCurrentQuestion();
+            localStorage.setItem("lingotrain_items", JSON.stringify(items));
+            localStorage.setItem("lingotrain_type", currentType);
+            feedbackArea.innerHTML = `✅ Автозагрузка: ${fileName} (${items.length} записей)`;
+            setTimeout(() => { feedbackArea.innerHTML = ""; }, 2500);
+            return true;
+          }
+        }
+      } catch (err) {
+        // файл не найден — пробуем следующий
+      }
+    }
+    return false;
+  }
+
   // ========== ИНИЦИАЛИЗАЦИЯ ==========
   fileInput.addEventListener("change", (e) => { if (e.target.files.length) loadFile(e.target.files[0]); });
   nextBtn.addEventListener("click", nextQuestion);
@@ -805,13 +845,19 @@
   dirBtns.forEach(btn => btn.addEventListener("click", () => setDirection(btn.dataset.dir)));
 
   document.addEventListener("keydown", handleGlobalKey);
-  loadFromStorage();
-  if (!items.length) {
-    questionTextEl.innerText = "📁 Загрузите .txt файл";
-    nextBtn.disabled = true;
-  } else {
-    renderCurrentQuestion();
-  }
+
+  // Пробуем авто-загрузку из папки, если нет — localStorage
+  autoLoadFromFolder().then((loaded) => {
+    if (!loaded) {
+      loadFromStorage();
+    }
+    if (!items.length) {
+      questionTextEl.innerText = "📁 Загрузите .txt файл";
+      nextBtn.disabled = true;
+    } else {
+      renderCurrentQuestion();
+    }
+  });
 </script>
 </body>
 </html>
