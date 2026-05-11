@@ -794,7 +794,7 @@
 
     // ========== АВТОЗАГРУЗКА ИЗ ПАПКИ ==========
     async function autoLoadFromFolder() {
-    const filesToTry = ["definitions.txt", "dictionary.txt", "english_terms.txt"];
+    const filesToTry = ["dictionary.txt", "definitions.txt","english_terms.txt"];
     for (const fileName of filesToTry) {
       try {
         const response = await fetch(fileName);
