@@ -355,6 +355,11 @@
         <button id="nextBtn" class="action-btn" disabled>➡️ Следующее слово (Enter)</button>
         <button id="speakTermBtn" class="speak-term-btn" style="display: none;">🔊 Озвучить термин</button>
       </div>
+      <div class="button-group" style="margin-top: 8px;">
+        <button id="markHardBtn" class="small-action" style="background:#fee2e2; display:none;">🔴 Сложно</button>
+        <button id="markNormalBtn" class="small-action" style="background:#fef9c3; display:none;">🟡 Нормально</button>
+        <button id="markEasyBtn" class="small-action" style="background:#dcfce7; display:none;">🟢 Выучено</button>
+      </div>
       <div id="feedbackArea" class="feedback"></div>
 
       <div class="stats-bar">
@@ -383,6 +388,18 @@
   let currentQuestionWord = "";
   let currentOptions = [];
 
+    // Сложность слов: ключ — индекс термина в items
+  let wordDifficulties = {}; // { индекс: "hard" | "normal" | "easy" }
+
+  function saveFullState() {
+    localStorage.setItem("lingotrain_items", JSON.stringify(items));
+    localStorage.setItem("lingotrain_type", currentType);
+    localStorage.setItem("lingotrain_index", currentIndex);
+    localStorage.setItem("lingotrain_correct", correctAnswers);
+    localStorage.setItem("lingotrain_answered", totalAnswered);
+    localStorage.setItem("lingotrain_difficulties", JSON.stringify(wordDifficulties));
+  }
+
   // DOM элементы
   const fileInput = document.getElementById("fileInput");
   const wordCountDisplay = document.getElementById("wordCountDisplay");
@@ -403,6 +420,9 @@
   const shuffleBtn = document.getElementById("shuffleBtn");
   const resetStatsBtn = document.getElementById("resetStatsBtn");
   const audioStatusSpan = document.getElementById("audioStatus");
+  const markHardBtn = document.getElementById("markHardBtn");
+  const markNormalBtn = document.getElementById("markNormalBtn");
+  const markEasyBtn = document.getElementById("markEasyBtn");
 
   const typeBtns = document.querySelectorAll(".type-btn");
   const modeBtns = document.querySelectorAll(".mode-btn");
@@ -464,10 +484,23 @@
   }
 
   // Озвучить текущий термин (по номеру строки)
-  function speakCurrentTerm() {
+    function speakCurrentTerm() {
     if (!items.length) return;
-    const termIndex = currentIndex + 1;
-    playTermAudio(termIndex);
+    const term = items[currentIndex].term;
+    if (window.speechSynthesis) {
+      speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(term);
+      utterance.lang = (currentType === 'definition') ? 'ru-RU' : 'en-US';
+      utterance.rate = 0.9;
+      if (audioStatusSpan) audioStatusSpan.innerText = "🔊 Произношение...";
+      utterance.onend = () => {
+        if (audioStatusSpan) audioStatusSpan.innerText = "🔊 Синтез речи";
+      };
+      speechSynthesis.speak(utterance);
+    } else {
+      const termIndex = currentIndex + 1;
+      playTermAudio(termIndex);
+    }
   }
 
   // ========== ОСНОВНАЯ ЛОГИКА ==========
@@ -481,6 +514,7 @@
     progressIndexSpan.innerText = items.length ? (currentIndex + 1) : 0;
     totalWordsSpan.innerText = items.length;
     wordCountDisplay.innerText = `записей: ${items.length}`;
+    saveFullState(); // ← добавить эту строку
   }
 
   function getCurrentQA() {
@@ -561,6 +595,16 @@
     // Показать кнопку "Озвучить термин" (можно повторно нажать)
     speakTermBtn.style.display = "inline-flex";
 
+        // Показать кнопки сложности
+    markHardBtn.style.display = "inline-flex";
+    markNormalBtn.style.display = "inline-flex";
+    markEasyBtn.style.display = "inline-flex";
+    // Подсветить текущую сложность
+    const currentDiff = wordDifficulties[currentIndex] || "";
+    markHardBtn.style.opacity = (currentDiff === "hard") ? "1" : "0.5";
+    markNormalBtn.style.opacity = (currentDiff === "normal") ? "1" : "0.5";
+    markEasyBtn.style.opacity = (currentDiff === "easy") ? "1" : "0.5";
+
     if (currentMode === "choice") {
       const btns = document.querySelectorAll(".option-btn");
       btns.forEach(btn => {
@@ -593,6 +637,9 @@
     isAnswered = false;
     // скрываем кнопку озвучивания для нового вопроса
     speakTermBtn.style.display = "none";
+    markHardBtn.style.display = "none";
+    markNormalBtn.style.display = "none";
+    markEasyBtn.style.display = "none";
     renderCurrentQuestion();
   }
 
@@ -602,6 +649,9 @@
       questionHint.innerText = "Нет данных";
       nextBtn.disabled = true;
       speakTermBtn.style.display = "none";
+      markHardBtn.style.display = "none";
+      markNormalBtn.style.display = "none";
+      markEasyBtn.style.display = "none";
       if (inputModeContainer.style.display !== 'none') answerInput.disabled = true;
       return;
     }
@@ -669,6 +719,7 @@
     totalAnswered = 0;
     isAnswered = false;
     speakTermBtn.style.display = "none";
+    wordDifficulties = {};
     renderCurrentQuestion();
     localStorage.setItem("lingotrain_items", JSON.stringify(items));
     localStorage.setItem("lingotrain_type", currentType);
@@ -695,13 +746,15 @@
       try {
         items = JSON.parse(saved);
         currentType = localStorage.getItem("lingotrain_type") || "translation";
+        currentIndex = parseInt(localStorage.getItem("lingotrain_index") || "0");
+        correctAnswers = parseInt(localStorage.getItem("lingotrain_correct") || "0");
+        totalAnswered = parseInt(localStorage.getItem("lingotrain_answered") || "0");
+        const savedDiff = localStorage.getItem("lingotrain_difficulties");
+        wordDifficulties = savedDiff ? JSON.parse(savedDiff) : {};
         typeBtns.forEach(btn => {
           if (btn.dataset.type === currentType) btn.classList.add("active");
           else btn.classList.remove("active");
         });
-        currentIndex = 0;
-        correctAnswers = 0;
-        totalAnswered = 0;
         isAnswered = false;
         renderCurrentQuestion();
       } catch(e) {}
@@ -716,6 +769,9 @@
     isAnswered = false;
     currentIndex = 0;
     speakTermBtn.style.display = "none";
+    markHardBtn.style.display = "none";
+    markNormalBtn.style.display = "none";
+    markEasyBtn.style.display = "none";
     renderCurrentQuestion();
     feedbackArea.innerHTML = "📊 Статистика сброшена. Начинаем сначала!";
     setTimeout(() => { if (feedbackArea.innerHTML.includes("сброшена")) feedbackArea.innerHTML = ""; }, 1500);
@@ -843,6 +899,21 @@
   typeBtns.forEach(btn => btn.addEventListener("click", () => setType(btn.dataset.type)));
   modeBtns.forEach(btn => btn.addEventListener("click", () => setMode(btn.dataset.mode)));
   dirBtns.forEach(btn => btn.addEventListener("click", () => setDirection(btn.dataset.dir)));
+
+    // ========== ОЦЕНКА СЛОЖНОСТИ ==========
+  function markDifficulty(level) {
+    if (!items.length) return;
+    wordDifficulties[currentIndex] = level;
+    saveFullState();
+    markHardBtn.style.opacity = (level === "hard") ? "1" : "0.5";
+    markNormalBtn.style.opacity = (level === "normal") ? "1" : "0.5";
+    markEasyBtn.style.opacity = (level === "easy") ? "1" : "0.5";
+  }
+
+  markHardBtn.addEventListener("click", () => markDifficulty("hard"));
+  markNormalBtn.addEventListener("click", () => markDifficulty("normal"));
+  markEasyBtn.addEventListener("click", () => markDifficulty("easy"));
+
 
   document.addEventListener("keydown", handleGlobalKey);
 
