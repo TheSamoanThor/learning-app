@@ -2,8 +2,9 @@
 <html lang="ru" data-theme="dark">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>LingoTrain</title>
+  <!-- it used to be 'i dunno wat this shi is...'... Well, was it a rebranding?)-->
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     /* ═══════════════════════════════════════
@@ -184,7 +185,7 @@
     }
     [data-theme="dark"] .file-btn { color: #0d1117; }
     .file-btn:active { opacity: 0.8; }
-    #fileInput { display: none; }
+    #fileInput, #fileInputMobile { display: none; }
     .word-count { margin-top: 7px; font-size: 0.73rem; color: var(--text2); text-align: center; }
 
     .pill-group { display: flex; flex-direction: column; gap: 5px; }
@@ -264,6 +265,12 @@
       flex-direction: column;
       gap: 14px;
       box-shadow: 0 4px 20px var(--shadow);
+      position: relative;
+    }
+
+    /* Knowledge bar extra spacing when placed at bottom */
+    .knowledge-bar-bottom {
+      margin-top: 4px;
     }
 
     /* Practice banner */
@@ -674,6 +681,7 @@
       .stats-row { gap: 6px; }
       .stat-chip { padding: 7px 4px; }
       .stat-val { font-size: 1rem; }
+      .file-btn { min-height: 44px; }
     }
     @media (min-width: 681px) {
       .drawer-overlay, .drawer, .bottom-nav { display: none !important; }
@@ -735,6 +743,14 @@
       <div class="pill-group">
         <button class="pill-btn active" data-dir="forward">→ Термин → Ответ</button>
         <button class="pill-btn"        data-dir="reverse">← Ответ → Термин</button>
+      </div>
+    </div>
+
+    <div class="sb-section">
+      <div class="sb-title">Оценка знаний</div>
+      <div class="pill-group">
+        <button class="pill-btn" data-pos="top">📌 Сверху</button>
+        <button class="pill-btn" data-pos="bottom">📍 Снизу</button>
       </div>
     </div>
 
@@ -845,7 +861,10 @@
       </div>
     </div>
 
-  </div></div><nav class="bottom-nav">
+  </div>
+</div>
+
+<nav class="bottom-nav">
   <div class="bottom-nav-inner">
     <button class="bnav-btn active" id="bnavTrain" onclick="switchTab('train')">
       <span class="bnav-icon">🎯</span>Тренировка
@@ -897,6 +916,14 @@
   </div>
 
   <div class="drawer-section">
+    <div class="drawer-title">Оценка знаний</div>
+    <div class="drawer-grid-2">
+      <button class="drawer-pill" data-pos="top">📌 Сверху</button>
+      <button class="drawer-pill" data-pos="bottom">📍 Снизу</button>
+    </div>
+  </div>
+
+  <div class="drawer-section">
     <div class="drawer-title">Управление</div>
     <div class="drawer-grid-2">
       <button class="drawer-pill" id="shuffleBtnMobile">🔀 Перемешать</button>
@@ -929,6 +956,7 @@ let currentOptions       = [];
 let practiceMode = null;
 let ttsEnabled   = true;
 let currentTheme = "dark";
+let knowledgeBarPosition = "top"; // "top" or "bottom"
 
 let knowledgeLists = { unread: [], hard: [], medium: [], learned: [] };
 
@@ -962,6 +990,50 @@ const ttsToggleBtn     = document.getElementById("ttsToggleBtn");
 const typeBtns = document.querySelectorAll("[data-type]");
 const modeBtns = document.querySelectorAll("[data-mode]");
 const dirBtns  = document.querySelectorAll("[data-dir]");
+const posBtns  = document.querySelectorAll("[data-pos]");
+
+// ═══════════════════════════════════════
+// KNOWLEDGE BAR POSITION
+// ═══════════════════════════════════════
+function repositionKnowledgeBar() {
+  const card = document.querySelector(".quiz-card");
+  if (!card) return;
+  const knowledgeBarEl = document.getElementById("knowledgeBar");
+  if (!knowledgeBarEl) return;
+  
+  // Remove from current parent
+  if (knowledgeBarEl.parentNode) knowledgeBarEl.remove();
+  
+  if (knowledgeBarPosition === "top") {
+    // Insert after .question-word
+    const questionWord = document.querySelector(".question-word");
+    if (questionWord && questionWord.parentNode === card) {
+      questionWord.insertAdjacentElement("afterend", knowledgeBarEl);
+    } else {
+      card.insertBefore(knowledgeBarEl, document.getElementById("choiceModeContainer"));
+    }
+  } else {
+    // Insert after .card-bottom
+    const cardBottom = document.querySelector(".card-bottom");
+    if (cardBottom && cardBottom.parentNode === card) {
+      cardBottom.insertAdjacentElement("afterend", knowledgeBarEl);
+    } else {
+      card.appendChild(knowledgeBarEl);
+    }
+  }
+  // Update active visual in settings
+  posBtns.forEach(btn => {
+    if (btn.dataset.pos === knowledgeBarPosition) btn.classList.add("active");
+    else btn.classList.remove("active");
+  });
+}
+
+function setKnowledgeBarPosition(pos) {
+  if (pos !== "top" && pos !== "bottom") return;
+  knowledgeBarPosition = pos;
+  localStorage.setItem("lingotrain_knowledgePos", pos);
+  repositionKnowledgeBar();
+}
 
 // ═══════════════════════════════════════
 // THEME
@@ -1234,7 +1306,6 @@ function handleAnswer(userAnswer) {
   speakCurrentTerm();
   speakTermBtn.classList.add("show");
 
-  // Knowledge bar: auto-select
   knowledgeBar.style.display = "flex";
   [knowHard, knowMedium, knowLearned].forEach(b => b.classList.remove("selected"));
   if (isCorrect) {
@@ -1250,7 +1321,6 @@ function handleAnswer(userAnswer) {
   if (currentMode === "choice") {
     document.querySelectorAll(".option-btn").forEach(btn => {
       btn.disabled = true;
-      // strip the number badge text for comparison
       const txt = btn.textContent.replace(/^[1-4]/, "").trim();
       if (normalizeStr(txt) === normCorrect) btn.classList.add("correct-highlight");
       if (!isCorrect && normalizeStr(txt) === normUser && normalizeStr(txt) !== normCorrect)
@@ -1317,6 +1387,9 @@ function renderCurrentQuestion() {
   nextBtn.disabled = !isAnswered;
   if (!isAnswered) { feedbackArea.textContent = ""; feedbackArea.className = "feedback"; }
   updateStatsUI();
+  
+  // Ensure knowledge bar is in correct position (in case settings changed while hidden)
+  repositionKnowledgeBar();
 }
 
 // ═══════════════════════════════════════
@@ -1329,7 +1402,6 @@ function parseFile(content) {
   for (let line of lines) {
     line = line.trim();
     if (!line) continue;
-    // Try " - " first, then tab, then single "-"
     let sepIdx = line.indexOf(" - ");
     let sepLen = 3;
     if (sepIdx === -1) {
@@ -1531,6 +1603,7 @@ exitPracticeBtnMobile.addEventListener("click", exitPracticeMode);
 typeBtns.forEach(b => b.addEventListener("click", () => { setType(b.dataset.type); }));
 modeBtns.forEach(b => b.addEventListener("click", () => { setMode(b.dataset.mode); }));
 dirBtns.forEach( b => b.addEventListener("click", () => { setDirection(b.dataset.dir); }));
+posBtns.forEach( b => b.addEventListener("click", () => { setKnowledgeBarPosition(b.dataset.pos); }));
 
 // Drag-and-drop
 document.body.addEventListener("dragover", e => e.preventDefault());
@@ -1543,7 +1616,7 @@ document.body.addEventListener("drop",     e => {
 // ═══════════════════════════════════════
 // INIT
 // ═══════════════════════════════════════
-(function init() {
+(async function init() {
   // Theme
   const savedTheme = localStorage.getItem("lingotrain_theme") || "dark";
   currentTheme = savedTheme;
@@ -1553,18 +1626,23 @@ document.body.addEventListener("drop",     e => {
   const savedTTS = localStorage.getItem("lingotrain_tts");
   if (savedTTS === "0") { ttsEnabled = false; ttsToggleBtn.textContent = "🔇"; ttsToggleBtn.classList.add("on"); }
 
+  // Knowledge position
+  const savedPos = localStorage.getItem("lingotrain_knowledgePos");
+  if (savedPos === "top" || savedPos === "bottom") knowledgeBarPosition = savedPos;
+  else knowledgeBarPosition = "top";
+  repositionKnowledgeBar();
+
   // Knowledge lists
   loadKnowledgeLists();
 
-  // Try auto-load files, then localStorage, then empty state
-  autoLoadFromFolder().then(loaded => {
-    if (!loaded) loadFromStorage();
-    if (!items.length) {
-      questionTextEl.textContent = "📂 Загрузите .txt файл";
-      nextBtn.disabled = true;
-      updateStatsUI();
-    }
-  });
+  // Try auto-load files, then localStorage
+  const loaded = await autoLoadFromFolder();
+  if (!loaded) loadFromStorage();
+  if (!items.length) {
+    questionTextEl.textContent = "📂 Загрузите .txt файл";
+    nextBtn.disabled = true;
+    updateStatsUI();
+  }
 })();
 </script>
 </body>
